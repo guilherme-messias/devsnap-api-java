@@ -1,11 +1,21 @@
 package br.com.guilhermemessias.devsnap.modules.episode;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Data
+@Entity(name = "episode")
 public class EpisodeEntity {
-    @NotBlank(message = "ID cannot be blank")
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @NotBlank(message = "Title cannot be blank")
@@ -16,4 +26,10 @@ public class EpisodeEntity {
 
     @NotBlank(message = "Solution cannot be blank")
     private String solution;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 }
