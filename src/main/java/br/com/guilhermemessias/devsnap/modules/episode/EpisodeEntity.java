@@ -1,7 +1,6 @@
 package br.com.guilhermemessias.devsnap.modules.episode;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
