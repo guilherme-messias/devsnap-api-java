@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/episodes")
 public class EpisodeController {
-    @PostMapping("/episodes")
-    public void createEpisode(@RequestBody EpisodeEntity episode) {
-        System.out.printf(episode.getTitle());
+    @PostMapping
+    public void createEpisode(@RequestBody EpisodeEntity episodeEntity) {
+        System.out.printf(episodeEntity.getTitle());
     }
 }
