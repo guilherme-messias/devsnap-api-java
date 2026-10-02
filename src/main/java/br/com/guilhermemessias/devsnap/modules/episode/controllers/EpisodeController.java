@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -35,7 +36,8 @@ public class EpisodeController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEpisode(@PathVariable @NotBlank String id) {
+    public ResponseEntity<Void> deleteEpisode(@PathVariable @NotBlank String id) {
         episodeService.deleteEpisodeById(id);
+        return ResponseEntity.noContent().build();
     }
 }
