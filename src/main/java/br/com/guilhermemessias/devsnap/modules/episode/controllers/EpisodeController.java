@@ -3,9 +3,10 @@ package br.com.guilhermemessias.devsnap.modules.episode.controllers;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/episodes")
@@ -19,8 +20,8 @@ public class EpisodeController {
     }
 
     @GetMapping
-    public List<EpisodeDTO> getAllEpisodes() {
-        return episodeService.getAllEpisodes();
+    public Page<EpisodeDTO> getAllEpisodes(@PageableDefault Pageable pageable) {
+        return episodeService.getAllEpisodes(pageable);
     }
 
     @GetMapping("/{id}")

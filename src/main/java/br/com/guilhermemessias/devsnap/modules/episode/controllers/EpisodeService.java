@@ -3,9 +3,9 @@ package br.com.guilhermemessias.devsnap.modules.episode.controllers;
 import br.com.guilhermemessias.devsnap.modules.episode.EpisodeEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,11 +21,8 @@ public class EpisodeService {
         return modelMapper.map(episodeEntity, EpisodeDTO.class);
     }
 
-    public List<EpisodeDTO> getAllEpisodes() {
-        List<EpisodeEntity> episodeEntities = episodeRepository.findAll();
-        return episodeEntities.stream()
-                .map(episodeEntity -> modelMapper.map(episodeEntity, EpisodeDTO.class))
-                .toList();
+    public Page<EpisodeDTO> getAllEpisodes(Pageable pageable) {
+        return episodeRepository.findAll(pageable).map(episodeEntity -> modelMapper.map(episodeEntity, EpisodeDTO.class));
     }
 
     public EpisodeDTO getEpisodeById(String id) {
