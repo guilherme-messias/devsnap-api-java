@@ -32,4 +32,9 @@ public class EpisodeController {
     public void updateEpisode(@PathVariable @NotBlank String id, @Valid @RequestBody EpisodeDTO episodeDTO) {
         episodeService.updateEpisodeById(id, episodeDTO);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteEpisode(@PathVariable @NotBlank String id) {
+        episodeService.deleteEpisodeById(id);
+    }
 }

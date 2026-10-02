@@ -45,4 +45,11 @@ public class EpisodeService {
 
         return modelMapper.map(episodeEntity, EpisodeDTO.class);
     }
+
+    public void deleteEpisodeById(String id) {
+        EpisodeEntity episodeEntity = episodeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Episode not found with id: " + id));
+
+        episodeRepository.delete(episodeEntity);
+    }
 }
