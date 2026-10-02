@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class EpisodeService {
@@ -17,5 +19,12 @@ public class EpisodeService {
         episodeRepository.save(episodeEntity);
 
         return modelMapper.map(episodeEntity, EpisodeDTO.class);
+    }
+
+    public List<EpisodeDTO> getAllEpisodes() {
+        List<EpisodeEntity> episodeEntities = episodeRepository.findAll();
+        return episodeEntities.stream()
+                .map(episodeEntity -> modelMapper.map(episodeEntity, EpisodeDTO.class))
+                .toList();
     }
 }
