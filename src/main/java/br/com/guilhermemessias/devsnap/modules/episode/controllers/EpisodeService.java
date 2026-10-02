@@ -1,6 +1,7 @@
 package br.com.guilhermemessias.devsnap.modules.episode.controllers;
 
 import br.com.guilhermemessias.devsnap.modules.episode.EpisodeEntity;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -27,13 +28,13 @@ public class EpisodeService {
 
     public EpisodeDTO getEpisodeById(String id) {
         EpisodeEntity episodeEntity = episodeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Episode not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Episode not found with id: " + id));
         return modelMapper.map(episodeEntity, EpisodeDTO.class);
     }
 
     public EpisodeDTO updateEpisodeById(String id, EpisodeDTO episodeDTO) {
         EpisodeEntity episodeEntity = episodeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Episode not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Episode not found with id: " + id));
 
         modelMapper.map(episodeDTO, episodeEntity);
         episodeEntity.setId(id);
@@ -45,7 +46,7 @@ public class EpisodeService {
 
     public void deleteEpisodeById(String id) {
         EpisodeEntity episodeEntity = episodeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Episode not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Episode not found with id: " + id));
 
         episodeRepository.delete(episodeEntity);
     }
