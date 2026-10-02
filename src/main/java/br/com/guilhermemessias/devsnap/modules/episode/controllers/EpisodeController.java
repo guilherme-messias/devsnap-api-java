@@ -31,8 +31,9 @@ public class EpisodeController {
     }
 
     @PutMapping("/{id}")
-    public void updateEpisode(@PathVariable @NotBlank String id, @Valid @RequestBody EpisodeDTO episodeDTO) {
-        episodeService.updateEpisodeById(id, episodeDTO);
+    public ResponseEntity<EpisodeDTO> updateEpisode(@PathVariable @NotBlank String id, @Valid @RequestBody EpisodeDTO episodeDTO) {
+        EpisodeDTO updatedEpisode = episodeService.updateEpisodeById(id, episodeDTO);
+        return ResponseEntity.ok(updatedEpisode);
     }
 
     @DeleteMapping("/{id}")
