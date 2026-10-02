@@ -33,4 +33,16 @@ public class EpisodeService {
                 .orElseThrow(() -> new RuntimeException("Episode not found with id: " + id));
         return modelMapper.map(episodeEntity, EpisodeDTO.class);
     }
+
+    public EpisodeDTO updateEpisodeById(String id, EpisodeDTO episodeDTO) {
+        EpisodeEntity episodeEntity = episodeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Episode not found with id: " + id));
+
+        modelMapper.map(episodeDTO, episodeEntity);
+        episodeEntity.setId(id);
+
+        episodeRepository.save(episodeEntity);
+
+        return modelMapper.map(episodeEntity, EpisodeDTO.class);
+    }
 }

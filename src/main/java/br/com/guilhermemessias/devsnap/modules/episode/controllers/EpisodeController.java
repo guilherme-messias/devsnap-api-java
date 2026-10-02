@@ -1,6 +1,7 @@
 package br.com.guilhermemessias.devsnap.modules.episode.controllers;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,12 @@ public class EpisodeController {
     }
 
     @GetMapping("/{id}")
-    public EpisodeDTO getEpisodeById(@PathVariable String id) {
+    public EpisodeDTO getEpisodeById(@PathVariable @NotBlank String id) {
         return episodeService.getEpisodeById(id);
+    }
+
+    @PutMapping("/{id}")
+    public void updateEpisode(@PathVariable @NotBlank String id, @Valid @RequestBody EpisodeDTO episodeDTO) {
+        episodeService.updateEpisodeById(id, episodeDTO);
     }
 }
