@@ -21,13 +21,15 @@ public class EpisodeController {
     }
 
     @GetMapping
-    public Page<EpisodeDTO> getAllEpisodes(@PageableDefault Pageable pageable) {
-        return episodeService.getAllEpisodes(pageable);
+    public ResponseEntity<Page<EpisodeDTO>> getAllEpisodes(@PageableDefault Pageable pageable) {
+        Page<EpisodeDTO> episodes = episodeService.getAllEpisodes(pageable);
+        return ResponseEntity.ok(episodes);
     }
 
     @GetMapping("/{id}")
-    public EpisodeDTO getEpisodeById(@PathVariable @NotBlank String id) {
-        return episodeService.getEpisodeById(id);
+    public ResponseEntity<EpisodeDTO> getEpisodeById(@PathVariable @NotBlank String id) {
+       EpisodeDTO episodeDTO = episodeService.getEpisodeById(id);
+        return ResponseEntity.ok(episodeDTO);
     }
 
     @PutMapping("/{id}")
