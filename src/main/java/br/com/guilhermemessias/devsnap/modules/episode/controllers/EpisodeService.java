@@ -27,4 +27,10 @@ public class EpisodeService {
                 .map(episodeEntity -> modelMapper.map(episodeEntity, EpisodeDTO.class))
                 .toList();
     }
+
+    public EpisodeDTO getEpisodeById(String id) {
+        EpisodeEntity episodeEntity = episodeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Episode not found with id: " + id));
+        return modelMapper.map(episodeEntity, EpisodeDTO.class);
+    }
 }

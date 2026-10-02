@@ -21,4 +21,9 @@ public class EpisodeController {
     public List<EpisodeDTO> getAllEpisodes() {
         return episodeService.getAllEpisodes();
     }
+
+    @GetMapping("/{id}")
+    public EpisodeDTO getEpisodeById(@PathVariable String id) {
+        return episodeService.getEpisodeById(id);
+    }
 }
