@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,14 +16,8 @@ public class EpisodeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-
-    @NotBlank(message = "Title cannot be blank")
     private String title;
-
-    @NotBlank(message = "Error cannot be blank")
     private String error;
-
-    @NotBlank(message = "Solution cannot be blank")
     private String solution;
 
     @CreationTimestamp
