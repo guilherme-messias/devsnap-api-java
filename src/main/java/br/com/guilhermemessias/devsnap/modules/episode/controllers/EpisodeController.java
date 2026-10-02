@@ -8,6 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/episodes")
@@ -16,8 +19,10 @@ public class EpisodeController {
     private final EpisodeService episodeService;
 
     @PostMapping
-    public void createEpisode(@Valid @RequestBody EpisodeDTO episodeDTO) {
-        episodeService.createEpisode(episodeDTO);
+    public ResponseEntity<EpisodeDTO> createEpisode(@Valid @RequestBody EpisodeDTO dto, UriComponentsBuilder uriComponentsBuilder) {
+        EpisodeDTO episodeDTO = episodeService.createEpisode(dto);
+        URI uri = uriComponentsBuilder.path("/episodes/{id}").buildAndExpand(episodeDTO.getId()).toUri();
+        return ResponseEntity.created(uri).body(episodeDTO);
     }
 
     @GetMapping
