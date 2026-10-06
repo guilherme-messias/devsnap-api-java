@@ -1,5 +1,6 @@
 package br.com.guilhermemessias.devsnap.modules.user.controllers;
 
+import br.com.guilhermemessias.devsnap.config.PasswordEncryption;
 import br.com.guilhermemessias.devsnap.modules.user.UserEntity;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,12 @@ public class UserService implements UserDetailsService {
 
     public CreateUserDTO createUser(@Valid CreateUserDTO dto) {
         UserEntity userEntity = modelMapper.map(dto, UserEntity.class);
+
+        String encryptedPassword = PasswordEncryption.encryptPassword(userEntity.getPassword());
+        userEntity.setPassword(encryptedPassword);
+
         userRepository.save(userEntity);
+
         return modelMapper.map(userEntity, CreateUserDTO.class);
     }
 }
