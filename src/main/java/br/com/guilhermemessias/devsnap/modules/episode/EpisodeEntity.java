@@ -11,7 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Data
-@Entity(name = "episode")
+@Entity(name = "tb_episode")
 public class EpisodeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

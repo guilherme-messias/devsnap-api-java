@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@Entity(name = "user")
+@Entity(name = "tb_user")
 public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
