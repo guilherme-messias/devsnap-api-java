@@ -3,10 +3,12 @@ package br.com.guilhermemessias.devsnap.config;
 import br.com.guilhermemessias.devsnap.modules.user.UserEntity;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+@Service
 public class TokenService {
     public String generateToken(UserEntity user) {
         try {

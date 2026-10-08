@@ -1,5 +1,7 @@
 package br.com.guilhermemessias.devsnap.modules.user.controllers;
 
+import br.com.guilhermemessias.devsnap.config.TokenService;
+import br.com.guilhermemessias.devsnap.modules.user.UserEntity;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     private final AuthenticationManager authenticationManager;
 
+    private final TokenService tokenService;
+
     @PostMapping
-    public ResponseEntity<Void> login(@RequestBody @Valid CredentialsUserDTO credentialsUser) {
+    public ResponseEntity login(@RequestBody @Valid CredentialsUserDTO credentialsUser) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 credentialsUser.getUsername(),
                 credentialsUser.getPassword()
@@ -26,6 +30,6 @@ public class LoginController {
 
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(tokenService.generateToken((UserEntity) authentication.getPrincipal()));
     }
 }
