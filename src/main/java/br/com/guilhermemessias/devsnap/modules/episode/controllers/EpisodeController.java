@@ -1,5 +1,6 @@
 package br.com.guilhermemessias.devsnap.modules.episode.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/episodes")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearer-key")
 public class EpisodeController {
     private final EpisodeService episodeService;
 
