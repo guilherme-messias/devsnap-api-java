@@ -24,4 +24,18 @@ public class TokenService {
             throw new RuntimeException("Error generating token", e);
         }
     }
+
+    public String searchUserToken(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256("secret");
+
+            return JWT.require(algorithm)
+                    .withIssuer("devsnap")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+        } catch (Exception e) {
+            throw new RuntimeException("Error searching user token", e);
+        }
+    }
 }
